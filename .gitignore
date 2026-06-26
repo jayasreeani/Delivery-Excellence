@@ -1,4 +1,6 @@
 .vercel
+.tools
 .DS_Store
 Thumbs.db
 *.log
+team360-deploy.zip
