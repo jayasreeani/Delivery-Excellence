@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { authMiddleware } from '../middleware/auth.js';
+import { authMiddleware, requireRole } from '../middleware/auth.js';
 import { getAiInsights } from '../services/deliveryService.js';
 
 const router = Router();
 
-router.get('/', authMiddleware, async (req, res) => {
+router.get('/', authMiddleware, requireRole('management'), async (req, res) => {
   try {
     const insights = await getAiInsights();
     res.json(insights);

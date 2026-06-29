@@ -94,7 +94,9 @@ export default function DashboardPage() {
           <KpiCard label="Total Tasks" value={kpis.totalTasks} change={4} changeLabel="vs last sprint" />
           <KpiCard label="Completed" value={kpis.completed} change={12} changeLabel="vs last sprint" variant="success" />
           <KpiCard label="In Progress" value={kpis.inProgress} change={-5} changeLabel="vs last sprint" />
-          <KpiCard label="Defects" value={kpis.defects} changeLabel="open defects" variant="danger" />
+          {user?.role === 'management' && (
+            <KpiCard label="Defects" value={kpis.defects} changeLabel="open defects" variant="danger" />
+          )}
           <KpiCard label="Avg Velocity" value={kpis.avgVelocity} suffix="pts" change={kpis.velocityChange} changeLabel="vs last sprint" />
         </div>
       )}

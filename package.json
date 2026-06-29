@@ -13,6 +13,7 @@
     "install:all": "npm run backend:install && npm run frontend:install",
     "backend:dev": "cd backend && npm run dev",
     "frontend:dev": "cd frontend && npm run dev",
-    "setup": "npm run install:all && npm run db:up && timeout /t 5 && npm run db:setup && npm run db:seed"
+    "setup": "npm run install:all && npm run db:up && node -e \"setTimeout(()=>{},5000)\" && npm run db:setup && npm run db:seed",
+    "smoke-test": "node scripts/smoke-test.mjs"
   }
 }

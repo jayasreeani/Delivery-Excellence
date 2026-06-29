@@ -4,3 +4,15 @@
 Thumbs.db
 *.log
 team360-deploy.zip
+
+# Dependencies & build output
+node_modules/
+frontend/.next/
+frontend/out/
+
+# Environment files
+backend/.env
+frontend/.env.local
+
+# Local database volume (Docker)
+postgres_data/

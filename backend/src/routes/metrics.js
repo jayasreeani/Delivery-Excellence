@@ -14,6 +14,9 @@ router.get('/', authMiddleware, async (req, res) => {
       dateTo: req.query.dateTo,
     };
     const metrics = await getMetrics(filters);
+    if (req.user.role === 'client') {
+      metrics.kpis = { ...metrics.kpis, defects: undefined };
+    }
     res.json(metrics);
   } catch (err) {
     res.status(500).json({ error: err.message });
