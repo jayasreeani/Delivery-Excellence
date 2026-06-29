@@ -1,0 +1,28 @@
+name: Deploy prototype to Vercel
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'index.html'
+      - 'assets/**'
+      - 'vercel.json'
+      - 'deploy.sh'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy static prototype
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "VERCEL_TOKEN secret is not configured. Add it in GitHub repo Settings → Secrets."
+            exit 1
+          fi
+          chmod +x ./deploy.sh
+          ./deploy.sh production
