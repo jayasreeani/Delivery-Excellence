@@ -1,8 +1,39 @@
 # TEAM360 – Delivery Intelligence Platform
 
-A modern enterprise web application prototype combining **employee management (360-degree view)** and **multi-project governance** for delivery managers, HR leaders, and executives.
+This repository contains two related applications:
 
-## Quick Start
+1. **Static prototype** (`index.html`) — Employee 360° and project governance UI (no build step)
+2. **Full-stack Delivery Platform** (`frontend/` + `backend/`) — Jira/Azure DevOps reporting with PostgreSQL
+
+See **[DELIVERY_PLATFORM.md](./DELIVERY_PLATFORM.md)** for the full-stack app (recommended for development).
+
+## Quick Start (Full-Stack Platform)
+
+Requires Node.js 18+, npm, and PostgreSQL (Docker optional).
+
+```bash
+# Install dependencies
+npm run install:all
+
+# Start PostgreSQL (Docker) or use a local instance
+npm run db:up          # Docker
+# — or configure DATABASE_URL in backend/.env for local Postgres
+
+# Initialize database
+cp backend/.env.example backend/.env
+npm run db:setup && npm run db:seed
+
+# Run API and frontend (separate terminals)
+npm run backend:dev    # http://localhost:4000
+npm run frontend:dev   # http://localhost:3000
+
+# Verify API
+npm run smoke-test
+```
+
+Demo logins: `admin@delivery.com` / `password123` (management), `client@delivery.com` / `password123` (client).
+
+## Quick Start (Static Prototype)
 
 Open `index.html` in any modern browser — no build step or Node.js required.
 
