@@ -4,3 +4,10 @@
 Thumbs.db
 *.log
 team360-deploy.zip
+
+# Delivery Platform — local env & build artifacts
+backend/.env
+frontend/.env.local
+node_modules/
+frontend/.next/
+frontend/out/
