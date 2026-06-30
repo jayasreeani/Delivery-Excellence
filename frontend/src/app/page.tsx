@@ -10,9 +10,12 @@ import VelocityLineChart from '@/components/charts/VelocityLineChart';
 import ProjectPieChart from '@/components/charts/ProjectPieChart';
 import ProjectCard from '@/components/ProjectCard';
 import InsightsPanel from '@/components/InsightsPanel';
+import ConnectionBanner, { LiveIndicator } from '@/components/ConnectionBanner';
 import { api } from '@/lib/api';
 import { useAuth } from '@/components/AuthProvider';
 import type { Metrics, Project, Filters, AiInsight } from '@/types';
+
+const REFRESH_INTERVAL_MS = 60_000;
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -24,9 +27,12 @@ export default function DashboardPage() {
   const [sources, setSources] = useState<string[]>([]);
   const [filters, setFilters] = useState<Filters>({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
-  const loadData = useCallback(async () => {
-    setLoading(true);
+  const loadData = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true);
+    setError('');
     try {
       const [m, p, i, f] = await Promise.all([
         api.getMetrics(filters),
@@ -39,14 +45,20 @@ export default function DashboardPage() {
       setInsights(i);
       setSprints(f.sprints);
       setSources(f.sources);
+      setLastUpdated(new Date());
     } catch (err) {
-      console.error(err);
+      setError(err instanceof Error ? err.message : 'Failed to load dashboard data');
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
   }, [filters, user?.role]);
 
   useEffect(() => { loadData(); }, [loadData]);
+
+  useEffect(() => {
+    const interval = setInterval(() => loadData(true), REFRESH_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, [loadData]);
 
   const handleBarClick = (status: string) => {
     router.push(`/work-items?status=${encodeURIComponent(status)}`);
@@ -80,6 +92,16 @@ export default function DashboardPage() {
         subtitle="Overview of all projects and key metrics"
         onExport={handleExport}
       />
+
+      <ConnectionBanner />
+      <LiveIndicator lastUpdated={lastUpdated} />
+
+      {error && (
+        <div className="mb-4 bg-red-50 border border-red-100 text-red-600 text-sm rounded-lg px-4 py-3">
+          {error}
+          <button onClick={() => loadData()} className="ml-3 underline font-medium">Retry</button>
+        </div>
+      )}
 
       <FiltersBar
         filters={filters}

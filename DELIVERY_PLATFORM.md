@@ -32,6 +32,46 @@ A full-stack centralized delivery reporting system that integrates **Jira** (mul
 - **Docker Desktop** (for PostgreSQL)
 - **npm**
 
+## Dynamic Application Architecture
+
+The app is now **fully dynamic** — data flows from PostgreSQL through API routes, not static mock files.
+
+```
+Browser → Next.js UI → /api/* (embedded server routes) → PostgreSQL
+                              ↓ (optional)
+                         Express backend (BACKEND_URL)
+```
+
+### What changed from static → dynamic
+
+| Before (static) | After (dynamic) |
+|-----------------|-----------------|
+| Mock data in `assets/js/data.js` | Live data from PostgreSQL |
+| No authentication | JWT login with role-based views |
+| Manual HTML updates | API-driven dashboards with auto-refresh (60s) |
+| Vercel served `index.html` only | Vercel runs Next.js + serverless API |
+
+### Deployment (Vercel — recommended)
+
+1. In [Vercel](https://vercel.com), import the GitHub repo
+2. Set **Root Directory** to `frontend`
+3. Add environment variables:
+   - `DATABASE_URL` — PostgreSQL connection string (use [Neon](https://neon.tech) or [Supabase](https://supabase.com) free tier)
+   - `JWT_SECRET` — long random string
+   - `DATABASE_SSL` — `true` for hosted Postgres
+4. Run database setup once (from your machine):
+   ```powershell
+   cd backend
+   # Point DATABASE_URL to your hosted Postgres
+   npm run db:setup
+   npm run db:seed
+   ```
+5. Deploy — app will be live at your Vercel URL with login, live KPIs, and reports
+
+### Optional: separate Express backend
+
+Set `BACKEND_URL` on Vercel to proxy API calls to a Render/Railway backend. Use `render.yaml` in this repo for one-click backend + Postgres on Render.
+
 ## Quick Start
 
 ### 1. Start PostgreSQL
