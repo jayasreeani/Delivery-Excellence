@@ -20,7 +20,7 @@ ROOT="$(cd "$(dirname "$0")" && pwd)"
 TMP_JSON="$(mktemp)"
 trap 'rm -f "$TMP_JSON"' EXIT
 
-node <<'NODE' "$ROOT" "$TARGET" "$TMP_JSON"
+node - "$ROOT" "$TARGET" "$TMP_JSON" <<'NODE'
 const fs = require('fs');
 const path = require('path');
 
@@ -65,7 +65,7 @@ console.log(`Packaged ${manifest.length} files for ${target} deploy.`);
 NODE
 
 echo "Deploying to Vercel ($TARGET)..."
-RESPONSE="$(curl -sS -X POST 'https://api.vercel.com/v13/deployments' \
+RESPONSE="$(curl -sS -X POST 'https://api.vercel.com/v13/deployments?skipAutoDetectionConfirmation=1' \
   -H "Authorization: Bearer $TOKEN" \
   -H 'Content-Type: application/json' \
   --data-binary @"$TMP_JSON")"
