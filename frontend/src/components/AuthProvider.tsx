@@ -28,7 +28,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
     api.getMe()
-      .then(setUser)
+      .then((u) => {
+        setUser(u);
+        if (pathname === '/login') router.push('/');
+      })
       .catch(() => {
         localStorage.removeItem('token');
         if (pathname !== '/login') router.push('/login');
