@@ -51,7 +51,10 @@ export function renderProjectTable(projects, showActions = true) {
     <div class="card">
       <div class="card-header">
         <div><div class="card-title">Project Overview</div><div class="card-subtitle">Cross-project delivery status</div></div>
-        ${showActions ? '<a href="#/projects" class="btn btn-ghost btn-sm">View All →</a>' : ''}
+        ${showActions ? `<div class="page-actions" style="margin-top:0">
+          <a href="#/projects?add=1" class="btn btn-primary btn-sm">+ Add Project</a>
+          <a href="#/projects" class="btn btn-ghost btn-sm">View All →</a>
+        </div>` : ''}
       </div>
       <div class="card-body" style="padding-top:8px">
         <div class="table-wrap">

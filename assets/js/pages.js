@@ -328,20 +328,26 @@ export function renderProjects() {
     : cardsHtml;
 
   return `
+    <div class="projects-page">
+    <div class="projects-toolbar-sticky">
+      <button class="btn btn-primary" id="add-project-btn" type="button">+ Add Project</button>
+      <a href="#/projects" class="btn btn-secondary btn-sm projects-toolbar-link">All Projects</a>
+    </div>
+
     <div class="page-header">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+      <div class="page-header-row">
         <div>
           <h1 class="page-title">Projects</h1>
           <p class="page-subtitle">Multi-project governance across Jira, Azure DevOps, and more</p>
         </div>
-        <button class="btn btn-primary" id="add-project-btn">+ Add Project</button>
+        <button class="btn btn-primary page-header-add-btn" id="add-project-btn-header" type="button">+ Add Project</button>
       </div>
     </div>
 
     <div class="page-toolbar">
       <div class="project-count">${filtered.length} of ${allProjects.length} projects</div>
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <input class="filter-input" id="project-search" type="search" placeholder="Search projects or PM..." value="${projectFilters.search}" style="min-width:220px" />
+      <div class="page-toolbar-actions">
+        <input class="filter-input" id="project-search" type="search" placeholder="Search projects or PM..." value="${projectFilters.search}" />
         <div class="view-toggle">
           <button type="button" data-project-view="cards" class="${projectFilters.view === 'cards' ? 'active' : ''}">Cards</button>
           <button type="button" data-project-view="table" class="${projectFilters.view === 'table' ? 'active' : ''}">Table</button>
@@ -349,7 +355,8 @@ export function renderProjects() {
       </div>
     </div>
 
-    ${projectFilters.view === 'table' ? tableHtml : cardsHtml}`;
+    ${projectFilters.view === 'table' ? tableHtml : cardsHtml}
+    </div>`;
 }
 
 function renderProjectCard(p) {
@@ -373,16 +380,25 @@ function renderProjectCard(p) {
     </div>`;
 }
 
-export function initProjects(onChange) {
+export function initProjects(onChange, options = {}) {
   initSparklines();
 
-  document.getElementById('add-project-btn')?.addEventListener('click', () => {
+  const openAddProject = () => {
     showAddProjectModal((data) => {
       const project = addProject(data);
       showToast(`Project "${project.name}" added`);
       onChange?.();
     });
-  });
+  };
+
+  document.getElementById('add-project-btn')?.addEventListener('click', openAddProject);
+  document.getElementById('add-project-btn-header')?.addEventListener('click', openAddProject);
+  document.getElementById('add-project-fab')?.addEventListener('click', openAddProject);
+
+  if (options.openAdd) {
+    requestAnimationFrame(openAddProject);
+    history.replaceState(null, '', '#/projects');
+  }
 
   document.getElementById('project-search')?.addEventListener('input', (e) => {
     projectFilters.search = e.target.value;

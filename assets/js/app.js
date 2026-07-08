@@ -18,9 +18,11 @@ import {
 let employeeFilters = {};
 
 function parseRoute() {
-  const hash = location.hash.slice(1) || '/';
-  const parts = hash.split('/').filter(Boolean);
-  return { path: '/' + parts.join('/'), segments: parts };
+  const raw = location.hash.slice(1) || '/';
+  const [pathPart, queryPart] = raw.split('?');
+  const parts = pathPart.split('/').filter(Boolean);
+  const params = new URLSearchParams(queryPart || '');
+  return { path: '/' + parts.join('/'), segments: parts, params };
 }
 
 function getBasePath(path) {
@@ -30,7 +32,7 @@ function getBasePath(path) {
 
 function navigate() {
   destroyCharts();
-  const { path, segments } = parseRoute();
+  const { path, segments, params } = parseRoute();
   const content = document.getElementById('app-content');
   const base = getBasePath(path);
 
@@ -50,7 +52,7 @@ function navigate() {
     init = () => initEmployeeProfile(segments[1]);
   } else if (path === '/projects') {
     html = renderProjects();
-    init = () => initProjects(() => navigate());
+    init = () => initProjects(() => navigate(), { openAdd: params.get('add') === '1' });
   } else if (segments[0] === 'projects' && segments[1]) {
     html = renderProjectDetail(segments[1]);
     init = () => initProjectDetail(segments[1]);
@@ -79,6 +81,9 @@ function navigate() {
   content.innerHTML = html;
   content.scrollTop = 0;
   if (init) requestAnimationFrame(() => init());
+
+  const fab = document.getElementById('add-project-fab');
+  if (fab) fab.classList.toggle('hidden', path !== '/projects');
 
   document.querySelectorAll('.nav-link').forEach(link => {
     const linkPath = link.dataset.path;
