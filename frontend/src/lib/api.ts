@@ -39,6 +39,19 @@ export const api = {
 
   getProjects: () => request<import('@/types').Project[]>('/projects'),
 
+  createProject: (body: {
+    name: string;
+    description?: string;
+    data_source_id?: string;
+    source_tags?: string[];
+    current_sprint?: string;
+    progress_pct?: number;
+  }) =>
+    request<import('@/types').Project>('/projects', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }),
+
   getMetrics: (filters: import('@/types').Filters = {}) =>
     request<import('@/types').Metrics>(`/metrics${toQuery(filters as Record<string, string>)}`),
 

@@ -51,7 +51,10 @@ export function renderProjectTable(projects, showActions = true) {
     <div class="card">
       <div class="card-header">
         <div><div class="card-title">Project Overview</div><div class="card-subtitle">Cross-project delivery status</div></div>
-        ${showActions ? '<a href="#/projects" class="btn btn-ghost btn-sm">View All →</a>' : ''}
+        ${showActions ? `<div class="page-actions" style="margin-top:0">
+          <a href="#/projects?add=1" class="btn btn-primary btn-sm">+ Add Project</a>
+          <a href="#/projects" class="btn btn-ghost btn-sm">View All →</a>
+        </div>` : ''}
       </div>
       <div class="card-body" style="padding-top:8px">
         <div class="table-wrap">
@@ -323,6 +326,60 @@ export function bindModalClose() {
   document.getElementById('modal-overlay')?.addEventListener('click', (e) => {
     if (e.target.id === 'modal-overlay') e.target.classList.add('hidden');
   });
+}
+
+export function showAddProjectModal(onSubmit) {
+  const overlay = document.getElementById('modal-overlay');
+  const modal = document.getElementById('modal');
+  modal.innerHTML = `
+    <div class="modal-title">Add Project</div>
+    <p style="color:var(--gray-500);margin-bottom:16px;font-size:13px">Create a new delivery project to track in TEAM360.</p>
+    <form id="add-project-form" class="form-grid">
+      <div class="form-field form-field-full">
+        <label for="project-name">Project name *</label>
+        <input class="filter-input" id="project-name" name="name" required placeholder="e.g. API Modernization" />
+      </div>
+      <div class="form-field">
+        <label for="project-pm">Project manager</label>
+        <input class="filter-input" id="project-pm" name="pm" placeholder="e.g. Sarah Chen" />
+      </div>
+      <div class="form-field">
+        <label for="project-status">Health status</label>
+        <select class="filter-input" id="project-status" name="status">
+          <option value="green">Healthy</option>
+          <option value="amber">At Risk</option>
+          <option value="red">Critical</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="project-progress">Progress (%)</label>
+        <input class="filter-input" id="project-progress" name="progress" type="number" min="0" max="100" value="0" />
+      </div>
+      <div class="form-field">
+        <label for="project-team">Team size</label>
+        <input class="filter-input" id="project-team" name="team" type="number" min="1" value="5" />
+      </div>
+      <div class="form-field">
+        <label for="project-sprint">Current sprint</label>
+        <input class="filter-input" id="project-sprint" name="sprint" placeholder="Sprint 1" />
+      </div>
+      <div class="form-field form-field-full">
+        <label for="project-description">Description</label>
+        <textarea class="filter-input" id="project-description" name="description" rows="3" placeholder="Brief project summary"></textarea>
+      </div>
+    </form>
+    <div style="margin-top:20px;display:flex;justify-content:flex-end;gap:8px">
+      <button type="button" class="btn btn-secondary" id="add-project-cancel">Cancel</button>
+      <button type="submit" form="add-project-form" class="btn btn-primary">Add Project</button>
+    </div>`;
+  overlay.classList.remove('hidden');
+
+  document.getElementById('add-project-cancel').onclick = () => overlay.classList.add('hidden');
+  document.getElementById('add-project-form').onsubmit = (e) => {
+    e.preventDefault();
+    onSubmit(Object.fromEntries(new FormData(e.target)));
+    overlay.classList.add('hidden');
+  };
 }
 
 export { getStatusBadge, getPerformanceBadge };
