@@ -61,6 +61,52 @@ export async function getProjectBySlug(slug) {
   return result.rows[0];
 }
 
+function slugify(name) {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+async function uniqueSlug(baseSlug) {
+  let slug = baseSlug;
+  let suffix = 2;
+  while (true) {
+    const existing = await query('SELECT id FROM projects WHERE slug = $1', [slug]);
+    if (!existing.rows.length) return slug;
+    slug = `${baseSlug}-${suffix++}`;
+  }
+}
+
+export async function createProject(input) {
+  const name = input.name?.trim();
+  if (!name) throw new Error('Project name is required');
+
+  const slug = await uniqueSlug(slugify(name));
+  const progress = Math.min(100, Math.max(0, Number(input.progress_pct) || 0));
+  const sourceTags = Array.isArray(input.source_tags)
+    ? input.source_tags
+    : (input.source_tags ? String(input.source_tags).split(',').map((t) => t.trim()).filter(Boolean) : []);
+
+  const result = await query(
+    `INSERT INTO projects (name, slug, description, data_source_id, source_tags, current_sprint, progress_pct)
+     VALUES ($1, $2, $3, $4, $5, $6, $7)
+     RETURNING *`,
+    [
+      name,
+      slug,
+      input.description?.trim() || null,
+      input.data_source_id || null,
+      sourceTags,
+      input.current_sprint?.trim() || null,
+      progress,
+    ]
+  );
+
+  return getProjects().then((projects) => projects.find((p) => p.id === result.rows[0].id) || result.rows[0]);
+}
+
 export async function getWorkItems(filters = {}) {
   const { where, params } = buildWhereClause(filters);
   const limit = filters.limit || 500;

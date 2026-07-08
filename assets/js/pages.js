@@ -1,15 +1,18 @@
 import {
-  kpis, projects, employees, alerts, aiInsights, teamMetrics,
+  kpis, employees, alerts, aiInsights, teamMetrics,
   resourceUtilization, weeklySummary, velocityTrend, defectTrend,
-  predictabilityTrend, reportTemplates, getEmployeeById, getProjectById
+  predictabilityTrend, reportTemplates, getEmployeeById, getProjectById,
+  getAllProjects, addProject
 } from './data.js';
 
 import {
   renderKPICards, renderProjectTable, renderNineBox, renderAlerts,
   renderAIInsights, renderResourceHeatmap, destroyCharts, initSparklines,
   initLineChart, initBarChart, initDoughnutChart, showToast, bindNineBoxClicks,
-  getStatusBadge, getPerformanceBadge
+  getStatusBadge, getPerformanceBadge, showAddProjectModal
 } from './components.js';
+
+let projectFilters = { search: '', view: 'cards' };
 
 export function renderDashboard() {
   return `
@@ -21,7 +24,7 @@ export function renderDashboard() {
     ${renderKPICards(kpis)}
 
     <div class="section">
-      ${renderProjectTable(projects.slice(0, 5))}
+      ${renderProjectTable(getAllProjects().slice(0, 5))}
     </div>
 
     <div class="grid-2 section">
@@ -310,36 +313,88 @@ export function initEmployeeProfile(id) {
 }
 
 export function renderProjects() {
+  const allProjects = getAllProjects();
+  const search = projectFilters.search.trim().toLowerCase();
+  const filtered = search
+    ? allProjects.filter((p) => p.name.toLowerCase().includes(search) || p.pm.toLowerCase().includes(search))
+    : allProjects;
+
+  const cardsHtml = filtered.length
+    ? `<div class="grid-3">${filtered.map((p) => renderProjectCard(p)).join('')}</div>`
+    : `<div class="empty-state card" style="padding:48px"><h2>No projects found</h2><p style="margin-top:8px;color:var(--gray-500)">${search ? 'Try a different search term.' : 'Add your first project to get started.'}</p></div>`;
+
+  const tableHtml = filtered.length
+    ? renderProjectTable(filtered, false)
+    : cardsHtml;
+
   return `
     <div class="page-header">
-      <h1 class="page-title">Projects</h1>
-      <p class="page-subtitle">Multi-project governance across Jira, Azure DevOps, and more</p>
-    </div>
-    <div class="grid-3">
-      ${projects.map(p => `
-        <div class="card project-card" onclick="location.hash='#/projects/${p.id}'">
-          <div class="project-card-header">
-            <div><div class="project-name">${p.name}</div><div class="project-pm">PM: ${p.pm}</div></div>
-            ${getStatusBadge(p.status)}
-          </div>
-          <div style="margin-bottom:8px">
-            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Progress</span><strong>${p.progress}%</strong></div>
-            <div class="progress-bar"><div class="progress-fill progress-${p.status === 'green' ? 'green' : p.status === 'amber' ? 'amber' : 'red'}" style="width:${p.progress}%"></div></div>
-          </div>
-          <canvas class="sparkline" data-sparkline="${p.velocityTrend.join(',')}" style="width:100%;height:40px;margin:8px 0"></canvas>
-          <div class="project-metrics">
-            <div class="project-metric"><label>Defects</label><span>${p.defects}</span></div>
-            <div class="project-metric"><label>Team</label><span>${p.team}</span></div>
-            <div class="project-metric"><label>SLA</label><span>${p.sla}%</span></div>
-          </div>
-          <div style="margin-top:14px"><span class="btn btn-ghost btn-sm">View Details →</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+        <div>
+          <h1 class="page-title">Projects</h1>
+          <p class="page-subtitle">Multi-project governance across Jira, Azure DevOps, and more</p>
         </div>
-      `).join('')}
+        <button class="btn btn-primary" id="add-project-btn">+ Add Project</button>
+      </div>
+    </div>
+
+    <div class="page-toolbar">
+      <div class="project-count">${filtered.length} of ${allProjects.length} projects</div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <input class="filter-input" id="project-search" type="search" placeholder="Search projects or PM..." value="${projectFilters.search}" style="min-width:220px" />
+        <div class="view-toggle">
+          <button type="button" data-project-view="cards" class="${projectFilters.view === 'cards' ? 'active' : ''}">Cards</button>
+          <button type="button" data-project-view="table" class="${projectFilters.view === 'table' ? 'active' : ''}">Table</button>
+        </div>
+      </div>
+    </div>
+
+    ${projectFilters.view === 'table' ? tableHtml : cardsHtml}`;
+}
+
+function renderProjectCard(p) {
+  return `
+    <div class="card project-card" onclick="location.hash='#/projects/${p.id}'">
+      <div class="project-card-header">
+        <div><div class="project-name">${p.name}</div><div class="project-pm">PM: ${p.pm}</div></div>
+        ${getStatusBadge(p.status)}
+      </div>
+      <div style="margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Progress</span><strong>${p.progress}%</strong></div>
+        <div class="progress-bar"><div class="progress-fill progress-${p.status === 'green' ? 'green' : p.status === 'amber' ? 'amber' : 'red'}" style="width:${p.progress}%"></div></div>
+      </div>
+      <canvas class="sparkline" data-sparkline="${p.velocityTrend.join(',')}" style="width:100%;height:40px;margin:8px 0"></canvas>
+      <div class="project-metrics">
+        <div class="project-metric"><label>Defects</label><span>${p.defects}</span></div>
+        <div class="project-metric"><label>Team</label><span>${p.team}</span></div>
+        <div class="project-metric"><label>SLA</label><span>${p.sla}%</span></div>
+      </div>
+      <div style="margin-top:14px"><span class="btn btn-ghost btn-sm">View Details →</span></div>
     </div>`;
 }
 
-export function initProjects() {
+export function initProjects(onChange) {
   initSparklines();
+
+  document.getElementById('add-project-btn')?.addEventListener('click', () => {
+    showAddProjectModal((data) => {
+      const project = addProject(data);
+      showToast(`Project "${project.name}" added`);
+      onChange?.();
+    });
+  });
+
+  document.getElementById('project-search')?.addEventListener('input', (e) => {
+    projectFilters.search = e.target.value;
+    onChange?.();
+  });
+
+  document.querySelectorAll('[data-project-view]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      projectFilters.view = btn.dataset.projectView;
+      onChange?.();
+    });
+  });
 }
 
 export function renderProjectDetail(id) {
@@ -356,6 +411,7 @@ export function renderProjectDetail(id) {
         <div>
           <h1 class="page-title">${p.name}</h1>
           <p class="page-subtitle">${p.sprint} · PM: ${p.pm} · Team size: ${p.team}</p>
+          ${p.description ? `<p style="margin-top:8px;color:var(--gray-600);font-size:14px;max-width:720px">${p.description}</p>` : ''}
         </div>
         ${getStatusBadge(p.status)}
       </div>

@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { authMiddleware } from '../middleware/auth.js';
-import { getProjects, getProjectBySlug } from '../services/deliveryService.js';
+import { authMiddleware, requireRole } from '../middleware/auth.js';
+import { getProjects, getProjectBySlug, createProject } from '../services/deliveryService.js';
 
 const router = Router();
 
@@ -17,6 +17,15 @@ router.get('/', authMiddleware, async (req, res) => {
     res.json(projects);
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/', authMiddleware, requireRole('management'), async (req, res) => {
+  try {
+    const project = await createProject(req.body);
+    res.status(201).json(project);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 });
 

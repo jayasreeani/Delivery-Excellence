@@ -50,7 +50,7 @@ function navigate() {
     init = () => initEmployeeProfile(segments[1]);
   } else if (path === '/projects') {
     html = renderProjects();
-    init = initProjects;
+    init = () => initProjects(() => navigate());
   } else if (segments[0] === 'projects' && segments[1]) {
     html = renderProjectDetail(segments[1]);
     init = () => initProjectDetail(segments[1]);

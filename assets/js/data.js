@@ -149,7 +149,52 @@ export function getEmployeeById(id) {
 }
 
 export function getProjectById(id) {
-  return projects.find(p => p.id === id);
+  return getAllProjects().find((p) => p.id === id);
+}
+
+const CUSTOM_PROJECTS_KEY = 'team360_custom_projects';
+
+function loadCustomProjects() {
+  try {
+    const raw = localStorage.getItem(CUSTOM_PROJECTS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCustomProjects(list) {
+  localStorage.setItem(CUSTOM_PROJECTS_KEY, JSON.stringify(list));
+}
+
+export function getAllProjects() {
+  return [...projects, ...loadCustomProjects()];
+}
+
+export function addProject(input) {
+  const name = input.name?.trim();
+  if (!name) throw new Error('Project name is required');
+
+  const custom = loadCustomProjects();
+  const progress = Math.min(100, Math.max(0, Number(input.progress) || 0));
+  const project = {
+    id: `p${Date.now()}`,
+    name,
+    status: input.status || 'green',
+    progress,
+    velocityTrend: [20, 22, 24, 26, 28, 30],
+    defects: Number(input.defects) || 0,
+    pm: input.pm?.trim() || 'Unassigned',
+    team: Number(input.team) || 5,
+    sprint: input.sprint?.trim() || 'Sprint 1',
+    sla: Number(input.sla) || 95,
+    description: input.description?.trim() || '',
+    custom: true,
+  };
+
+  custom.push(project);
+  saveCustomProjects(custom);
+  return project;
 }
 
 export function getEmployeesInNineBoxCell(row, col) {
