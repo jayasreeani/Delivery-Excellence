@@ -1,0 +1,31 @@
+name: Deploy Jayasree portfolio to Vercel
+
+on:
+  push:
+    branches: [cursor/jayasree-portfolio-deploy-4ad9, master]
+    paths:
+      - 'jayasree-portfolio/**'
+      - '.github/workflows/deploy-portfolio-vercel.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Vercel token
+        id: check
+        run: |
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "VERCEL_TOKEN secret is not set — skipping Vercel deploy."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deploy to Vercel
+        if: steps.check.outputs.skip != 'true'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: bash jayasree-portfolio/deploy.sh production
