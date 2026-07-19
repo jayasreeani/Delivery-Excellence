@@ -168,45 +168,23 @@ strong {
 /* Hero */
 .hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: grid;
-  align-items: end;
+  min-height: auto;
+  padding: calc(var(--header-h) + 3.5rem) 0 3.5rem;
   overflow: hidden;
-  color: var(--white);
+  color: var(--ink);
 }
 
-.hero-media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.hero-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 18%;
-  transform: scale(1.04);
-  animation: hero-zoom 12s var(--ease) forwards;
-}
-
-.hero-media-wash {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(105deg, rgba(15, 39, 68, 0.88) 0%, rgba(15, 39, 68, 0.72) 42%, rgba(15, 39, 68, 0.28) 70%, rgba(15, 39, 68, 0.15) 100%),
-    linear-gradient(0deg, rgba(15, 39, 68, 0.55) 0%, transparent 45%);
+.hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(220px, 380px);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
 }
 
 .hero-copy {
   position: relative;
   z-index: 1;
-  padding: calc(var(--header-h) + 4rem) 0 4.5rem;
-  max-width: 40rem;
-  margin-left: max(1.25rem, calc((100% - 1120px) / 2));
-  margin-right: auto;
-  width: min(40rem, calc(100% - 2.5rem));
+  max-width: 36rem;
 }
 
 .hero-kicker {
@@ -215,30 +193,46 @@ strong {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--copper);
 }
 
 .hero-brand {
   margin: 0 0 1.1rem;
   font-family: var(--font-display);
-  font-size: clamp(3.4rem, 9vw, 5.6rem);
+  font-size: clamp(3rem, 7vw, 4.8rem);
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.02em;
-  color: var(--white);
+  color: var(--ink);
 }
 
 .hero-lead {
   margin: 0 0 1.75rem;
   max-width: 32rem;
   font-size: clamp(1.05rem, 2vw, 1.2rem);
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--ink-soft);
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.85rem;
+}
+
+.hero-portrait {
+  justify-self: end;
+  width: min(100%, 380px);
+}
+
+.hero-portrait img {
+  width: 100%;
+  height: auto;
+  max-height: min(560px, 68vh);
+  object-fit: cover;
+  object-position: center 18%;
+  border-radius: 0.45rem;
+  box-shadow: 0 18px 40px rgba(15, 39, 68, 0.14);
+  animation: hero-rise 0.9s var(--ease) both;
 }
 
 /* Buttons */
@@ -270,13 +264,13 @@ strong {
 
 .btn-ghost {
   background: transparent;
-  color: var(--white);
-  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--ink);
+  border-color: var(--line);
 }
 
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.75);
+  background: rgba(15, 39, 68, 0.04);
+  border-color: var(--ink-soft);
 }
 
 .contact .btn-ghost {
@@ -552,15 +546,21 @@ strong {
 .hero .reveal:nth-child(3) { transition-delay: 0.3s; }
 .hero .reveal:nth-child(4) { transition-delay: 0.42s; }
 
-@keyframes hero-zoom {
-  from { transform: scale(1.08); }
-  to { transform: scale(1.02); }
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal,
-  .hero-media img,
+  .hero-portrait img,
   .btn {
     animation: none !important;
     transition: none !important;
@@ -573,8 +573,15 @@ strong {
 @media (max-width: 900px) {
   .about-layout,
   .experience-item,
-  .ai-list {
+  .ai-list,
+  .hero-layout {
     grid-template-columns: 1fr;
+  }
+
+  .hero-portrait {
+    justify-self: start;
+    width: min(100%, 320px);
+    order: -1;
   }
 
   .about-facts {
@@ -615,18 +622,16 @@ strong {
     display: none;
   }
 
-  .hero-copy {
-    margin-left: 1.25rem;
-    padding-bottom: 3.25rem;
+  .hero {
+    padding: calc(var(--header-h) + 2rem) 0 2.5rem;
   }
 
-  .hero-media-wash {
-    background:
-      linear-gradient(180deg, rgba(15, 39, 68, 0.35) 0%, rgba(15, 39, 68, 0.55) 35%, rgba(15, 39, 68, 0.92) 100%);
+  .hero-portrait {
+    width: min(100%, 280px);
   }
 
-  .hero-media img {
-    object-position: center 12%;
+  .hero-portrait img {
+    max-height: 380px;
   }
 
   .work-item {
