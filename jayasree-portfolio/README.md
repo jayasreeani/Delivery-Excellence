@@ -12,12 +12,21 @@ python3 -m http.server 8080
 
 ## Deploy
 
-### GitHub Pages
+### GitHub Pages (recommended)
 
-1. Merge this branch (or enable Pages on the branch).
-2. In the repo: **Settings → Pages → Build and deployment → GitHub Actions**.
-3. The workflow `.github/workflows/deploy-portfolio-pages.yml` publishes the `jayasree-portfolio/` folder.
-4. Site URL: `https://jayasreeani.github.io/delivery-excellence/`
+The workflow `publish-portfolio-gh-pages.yml` already publishes this folder to the **`gh-pages`** branch.
+
+Enable Pages once in the GitHub repo:
+
+1. Open **Settings → Pages**
+2. Under **Build and deployment**, set **Source** to **Deploy from a branch**
+3. Branch: **`gh-pages`** / folder: **`/`** (root) → Save
+
+Live URL after enabling:
+
+`https://jayasreeani.github.io/Delivery-Excellence/`
+
+(Alternative: Source = **GitHub Actions**, then re-run `deploy-portfolio-pages.yml`.)
 
 ### Vercel
 
