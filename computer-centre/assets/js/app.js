@@ -16,8 +16,7 @@ const institute = {
   whatsapp: '919446724270',
   mapsUrl: 'https://maps.google.com/?q=Kajal+Building+Annie+Hall+Road+Palayam+Kozhikode+673002',
   hours: {
-    all: 'Mon – Sun: 9:00 AM – 6:30 PM',
-    detail: 'Open all days including Sunday',
+    all: 'Monday – Sunday: 9:00 AM – 6:30 PM',
   },
 };
 
@@ -121,7 +120,7 @@ function renderHome() {
         <div class="hero-copy reveal">
           <div class="eyebrow animate-shimmer">Kozhikode · Palayam · Near Railway Station</div>
           <h1 class="animate-title">Government-recognized computer training with <span class="text-gradient">20+ years</span> of excellence.</h1>
-          <p>NORKA-attested certificates for PSC exams, overseas opportunities, and career growth. Online & offline batches available — open all days including Sunday.</p>
+          <p>NORKA-attested certificates for PSC exams, overseas opportunities, and career growth. Online & offline batches at our Palayam centre near Kozhikode railway station.</p>
           <div class="hero-actions">
             <a href="#/courses" class="btn btn-primary btn-glow">View Courses</a>
             <a href="https://wa.me/${institute.whatsapp}" class="btn btn-secondary" target="_blank" rel="noopener">WhatsApp ${institute.phones[0]}</a>
@@ -129,19 +128,28 @@ function renderHome() {
           <div class="hero-stats">
             <div class="stat-pill reveal" style="--delay:100ms"><strong>${institute.experience}</strong><span>Years experience</span></div>
             <div class="stat-pill reveal" style="--delay:200ms"><strong>${institute.rating}★</strong><span>${institute.reviews} reviews</span></div>
-            <div class="stat-pill reveal" style="--delay:300ms"><strong>7 days</strong><span>Open including Sunday</span></div>
+            <div class="stat-pill reveal" style="--delay:300ms"><strong>Palayam</strong><span>Near Railway Station</span></div>
           </div>
         </div>
-        <div class="hero-card reveal float-card" style="--delay:150ms">
-          <h3>Why choose E+++ Solutions?</h3>
-          <div class="hero-list">
-            ${whyChooseUs.map((item, i) => `
-              <div class="hero-list-item reveal" style="--delay:${200 + i * 60}ms">
-                <div class="icon">✓</div>
-                <div><strong>${item}</strong></div>
-              </div>
-            `).join('')}
-          </div>
+        <div class="hero-card reveal float-card emblem-card" style="--delay:150ms">
+          <img src="assets/images/rutronix-emblem.jpeg" alt="Kerala State Rutronix — ITKerala Software Education Project" class="rutronix-emblem" />
+          <p class="muted emblem-caption">Kerala State Rutronix · ITKerala Software Education Project</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt reveal">
+      <div class="container">
+        <div class="section-header">
+          <h2>Why choose E+++ Solutions?</h2>
+        </div>
+        <div class="grid-3">
+          ${whyChooseUs.map((item, i) => `
+            <div class="card reveal hover-lift" style="--delay:${i * 70}ms">
+              <div class="card-icon">✓</div>
+              <p><strong>${item}</strong></p>
+            </div>
+          `).join('')}
         </div>
       </div>
     </section>
@@ -191,6 +199,9 @@ function renderAbout() {
             <h3>Certifications</h3>
             <p class="muted">NORKA-attested certificates from a Kerala government-recognized institute — trusted for PSC applications and international opportunities.</p>
           </div>
+        </div>
+        <div class="card reveal" style="--delay:100ms;margin-top:24px">
+          <img src="assets/images/rutronix-emblem.jpeg" alt="Kerala State Rutronix" class="rutronix-emblem about-emblem" />
         </div>
         <div class="card reveal" style="--delay:200ms;margin-top:24px">
           <h3>Why choose us?</h3>
@@ -250,33 +261,6 @@ function renderCourses() {
     </section>`;
 }
 
-function renderPricing() {
-  return `
-    <section class="section page-top">
-      <div class="container">
-        <div class="section-header reveal">
-          <h2>Admissions & fees</h2>
-          <p>Course fees vary by program and duration. Contact us for batch schedules, eligibility, and current fee structure.</p>
-        </div>
-        <div class="grid-3">
-          ${[
-            { name: 'Certificate Courses', price: '6 months', unit: 'CWPDE & more', features: ['Typing & data entry', 'MS Office & DTP', 'Ideal for beginners', '10th pass eligible'] },
-            { name: 'Diploma Programs', price: '1 year', unit: '720 hours', featured: true, features: ['PDCFA, DCA, CTTC', 'Lab + project work', 'Government recognized', 'NORKA attestation'] },
-            { name: 'Professional Diplomas', price: 'Custom', unit: 'programs', features: ['Web design & CAD', 'GST & taxation', 'Interior & fashion design', 'Career counselling'] },
-          ].map((p, i) => `
-            <article class="card reveal hover-lift ${p.featured ? 'featured' : ''}" style="--delay:${i * 90}ms">
-              ${p.featured ? '<span class="badge">Most Popular</span>' : ''}
-              <h3>${p.name}</h3>
-              <div class="price">${p.price} <small>${p.unit}</small></div>
-              <ul>${p.features.map((f) => `<li>${f}</li>`).join('')}</ul>
-              <a href="https://wa.me/${institute.whatsapp}" class="btn ${p.featured ? 'btn-primary' : 'btn-secondary'}" target="_blank" rel="noopener">WhatsApp for fees</a>
-            </article>
-          `).join('')}
-        </div>
-      </div>
-    </section>`;
-}
-
 function renderContact() {
   return `
     <section class="section page-top">
@@ -316,7 +300,12 @@ function renderContact() {
               <div class="info-item"><div class="icon">📞</div><div><strong>Phone</strong><p class="muted">${phonesHtml()}</p></div></div>
               <div class="info-item"><div class="icon">💬</div><div><strong>WhatsApp</strong><p class="muted"><a href="https://wa.me/${institute.whatsapp}" target="_blank" rel="noopener" style="color:inherit">+91 94467 24270</a></p></div></div>
               <div class="info-item"><div class="icon">✉️</div><div><strong>Email</strong><p class="muted"><a href="mailto:${institute.email}" style="color:inherit">${institute.email}</a></p></div></div>
-              <div class="info-item"><div class="icon">🕐</div><div><strong>Hours</strong><p class="muted">${institute.hours.all}<br />${institute.hours.detail}</p></div></div>
+              <div class="info-item"><div class="icon">🕐</div><div><strong>Hours</strong><p class="muted">${institute.hours.all}</p></div></div>
+              <div class="info-item social-row">
+                <a href="https://www.instagram.com/eplusplussolution" target="_blank" rel="noopener" class="social-link">
+                  <img src="assets/images/icon-instagram.jpeg" alt="Instagram" /> @eplusplussolution
+                </a>
+              </div>
             </div>
           </div>
           <div class="card cta-card reveal float-card" style="--delay:200ms">
@@ -334,7 +323,6 @@ const routes = {
   '/about': renderAbout,
   '/services': renderServices,
   '/courses': renderCourses,
-  '/pricing': renderPricing,
   '/contact': renderContact,
 };
 

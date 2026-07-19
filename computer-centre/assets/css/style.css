@@ -1,17 +1,17 @@
 :root {
-  --bg: #0b1220;
-  --bg-soft: #111a2e;
+  --bg: #0f172a;
+  --bg-soft: #1e3a8a;
   --surface: #ffffff;
-  --surface-muted: #f4f7fb;
+  --surface-muted: #f0f5ff;
   --text: #0f172a;
-  --text-muted: #64748b;
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --accent: #06b6d4;
+  --text-muted: #475569;
+  --primary: #1d4ed8;
+  --primary-dark: #1e40af;
+  --primary-light: #dbeafe;
+  --accent: #2563eb;
   --success: #10b981;
-  --warning: #f59e0b;
-  --border: #e2e8f0;
-  --shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+  --border: #bfdbfe;
+  --shadow: 0 10px 40px rgba(29, 78, 216, 0.08);
   --radius: 16px;
   --radius-sm: 10px;
   --container: 1120px;
@@ -24,7 +24,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: Inter, system-ui, sans-serif;
   color: var(--text);
-  background: #f8fafc;
+  background: #ffffff;
   line-height: 1.6;
 }
 
@@ -42,9 +42,78 @@ img { max-width: 100%; display: block; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--primary-light);
+}
+
+.brand-logo {
+  height: 56px;
+  width: auto;
+  max-width: min(340px, 72vw);
+  object-fit: contain;
+}
+
+.footer-logo {
+  height: 52px;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  margin-bottom: 14px;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
+.rutronix-emblem {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+}
+
+.about-emblem { max-width: 520px; }
+
+.hero-card.emblem-card {
+  background: #fff;
+  color: var(--text);
+}
+
+.emblem-card {
+  border: 2px solid var(--primary-light);
+  text-align: center;
+  padding: 20px;
+}
+
+.emblem-caption {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.social-row { margin-top: 8px; }
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.social-link img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.whatsapp-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .header-inner {
@@ -69,7 +138,7 @@ img { max-width: 100%; display: block; }
   place-items: center;
   font-weight: 800;
   color: #fff;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
 }
 
 .brand-text {
@@ -154,10 +223,7 @@ img { max-width: 100%; display: block; }
 /* Hero */
 .hero {
   padding: 72px 0 56px;
-  background:
-    radial-gradient(circle at top right, rgba(6, 182, 212, 0.12), transparent 30%),
-    radial-gradient(circle at left, rgba(37, 99, 235, 0.12), transparent 35%),
-    linear-gradient(180deg, #fff, #f8fafc);
+  background: linear-gradient(180deg, #ffffff 0%, var(--surface-muted) 100%);
 }
 
 .hero-grid {
@@ -218,11 +284,12 @@ img { max-width: 100%; display: block; }
 }
 
 .hero-card {
-  background: var(--bg);
+  background: var(--primary-dark);
   color: #fff;
   border-radius: 24px;
   padding: 28px;
   box-shadow: var(--shadow);
+  border: 2px solid var(--primary-light);
 }
 
 .hero-card h3 {
@@ -429,10 +496,11 @@ img { max-width: 100%; display: block; }
 
 /* Footer */
 .site-footer {
-  background: var(--bg);
-  color: #cbd5e1;
+  background: var(--primary-dark);
+  color: #dbeafe;
   padding: 56px 0 0;
   margin-top: 40px;
+  border-top: 4px solid var(--primary);
 }
 
 .footer-grid {
@@ -530,9 +598,9 @@ img { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.12), transparent 40%),
-    radial-gradient(circle at 80% 10%, rgba(6, 182, 212, 0.14), transparent 35%),
-    linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+    radial-gradient(circle at 20% 20%, rgba(29, 78, 216, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 10%, rgba(37, 99, 235, 0.06), transparent 35%),
+    linear-gradient(180deg, #fff 0%, #f0f5ff 100%);
   animation: gradientShift 12s ease infinite;
   background-size: 200% 200%;
   z-index: 0;
@@ -545,7 +613,7 @@ img { max-width: 100%; display: block; }
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary-dark), var(--accent));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -591,7 +659,7 @@ img { max-width: 100%; display: block; }
   animation: pulse-ring 1.5s ease infinite;
 }
 
-.section-alt { background: #fff; }
+.section-alt { background: var(--surface-muted); }
 
 .page-top { padding-top: 48px; }
 
@@ -645,7 +713,7 @@ img { max-width: 100%; display: block; }
 }
 
 .cta-card {
-  background: linear-gradient(135deg, #1d4ed8, #0891b2);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
   color: #fff;
   border: none;
 }
