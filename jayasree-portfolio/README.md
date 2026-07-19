@@ -2,7 +2,9 @@
 
 Executive AI delivery portfolio for **Jayasree Kuniyil**.
 
-**Custom domain:** `https://jayasreekuniyil.com`
+## Live site
+
+**https://jayasreeani.github.io/Delivery-Excellence/**
 
 ## Local preview
 
@@ -14,25 +16,13 @@ python3 -m http.server 8080
 
 ## Deploy
 
-### GitHub Pages + custom domain
+### GitHub Pages
 
-1. Site publishes from the **`gh-pages`** branch (workflow: `publish-portfolio-gh-pages.yml`).
-2. `CNAME` is set to **`jayasreekuniyil.com`**.
-3. In GitHub: **Settings → Pages → Custom domain** → enter `jayasreekuniyil.com` → Save → wait for DNS check → enable **Enforce HTTPS**.
+The workflow `publish-portfolio-gh-pages.yml` publishes this folder to the **`gh-pages`** branch.
 
-### DNS records (at your domain registrar)
-
-| Type | Name | Value |
-|------|------|--------|
-| A | `@` | `185.199.108.153` |
-| A | `@` | `185.199.109.153` |
-| A | `@` | `185.199.110.153` |
-| A | `@` | `185.199.111.153` |
-| CNAME | `www` | `jayasreeani.github.io` |
-
-### Temporary URL (until DNS propagates)
-
-`https://jayasreeani.github.io/Delivery-Excellence/`
+1. **Settings → Pages**
+2. Source: **Deploy from a branch**
+3. Branch: **`gh-pages`** / **`/`** → Save
 
 ### Vercel
 
@@ -40,5 +30,3 @@ python3 -m http.server 8080
 export VERCEL_TOKEN=your_token
 ./jayasree-portfolio/deploy.sh production
 ```
-
-Or import the `jayasree-portfolio` directory in the Vercel dashboard.
