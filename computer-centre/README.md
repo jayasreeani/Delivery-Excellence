@@ -1,6 +1,6 @@
-# TechHub Computer Centre Website
+# E+++ Solutions Website
 
-A modern marketing website for a computer training centre and internet café.
+Marketing website for **E+++ Solutions** — a computer training institute and digital services centre.
 
 ## Pages
 

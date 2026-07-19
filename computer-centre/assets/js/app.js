@@ -109,9 +109,9 @@ function renderHome() {
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">Welcome to TechHub Computer Centre</div>
+          <div class="eyebrow">Welcome to E+++ Solutions</div>
           <h1>Learn, connect, and get things done — all in one place.</h1>
-          <p>From certified computer courses and high-speed internet access to printing, repairs, and exam support — we help students, job seekers, and small businesses every day.</p>
+          <p>From certified computer courses and high-speed internet access to printing, repairs, and exam support — E+++ Solutions helps students, job seekers, and small businesses every day.</p>
           <div class="hero-actions">
             <a href="#/courses" class="btn btn-primary">Browse Courses</a>
             <a href="#/contact" class="btn btn-secondary">Book a Visit</a>
@@ -123,7 +123,7 @@ function renderHome() {
           </div>
         </div>
         <div class="hero-card">
-          <h3>Why families choose TechHub</h3>
+          <h3>Why students choose E+++ Solutions</h3>
           <div class="hero-list">
             <div class="hero-list-item">
               <div class="icon">✓</div>
@@ -146,7 +146,7 @@ function renderHome() {
       <div class="container">
         <div class="section-header">
           <h2>Everything you need in a modern computer centre</h2>
-          <p>Whether you are learning your first skills or running a business, TechHub has the tools and support to help you succeed.</p>
+          <p>Whether you are learning your first skills or running a business, E+++ Solutions has the tools and support to help you succeed.</p>
         </div>
         <div class="grid-3">
           ${services.slice(0, 3).map((s) => `
@@ -308,7 +308,7 @@ function renderContact() {
               </div>
               <div class="info-item">
                 <div class="icon">✉️</div>
-                <div><strong>Email</strong><p class="muted">hello@techhubcc.com</p></div>
+                <div><strong>Email</strong><p class="muted">info@eplusplussolutions.com</p></div>
               </div>
               <div class="info-item">
                 <div class="icon">🕐</div>
@@ -360,7 +360,7 @@ function navigate() {
   const path = parseRoute();
   const render = routes[path] || renderHome;
   document.getElementById('app').innerHTML = render();
-  document.title = `${path === '/' ? 'Home' : path.slice(1).charAt(0).toUpperCase() + path.slice(2)} | TechHub Computer Centre`;
+  document.title = `${path === '/' ? 'Home' : path.slice(1).charAt(0).toUpperCase() + path.slice(2)} | E+++ Solutions`;
 
   document.querySelectorAll('.site-nav a[data-path]').forEach((link) => {
     link.classList.toggle('active', link.dataset.path === path);

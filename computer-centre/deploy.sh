@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Deploy TechHub Computer Centre to Vercel.
+# Deploy E+++ Solutions website to Vercel.
 set -euo pipefail
 
 TARGET="${1:-production}"
@@ -40,7 +40,7 @@ const manifest = walk(root).map(({ rel, full }) => {
   return { file: rel.replace(/\\/g, '/'), data: fs.readFileSync(full).toString('base64'), encoding: 'base64' };
 });
 
-fs.writeFileSync(outPath, JSON.stringify({ name: 'techhub-computer-centre', target, files: manifest }));
+fs.writeFileSync(outPath, JSON.stringify({ name: 'eplusplus-solutions', target, files: manifest }));
 console.log(`Packaged ${manifest.length} files.`);
 NODE
 
