@@ -1,0 +1,40 @@
+name: Publish portfolio to gh-pages branch
+
+# Publishes jayasree-portfolio/ to the gh-pages branch.
+# After the first successful run, enable Pages once:
+#   Settings → Pages → Deploy from a branch → gh-pages / (root)
+
+on:
+  push:
+    branches: [cursor/jayasree-portfolio-deploy-4ad9, master]
+    paths:
+      - 'jayasree-portfolio/**'
+      - '.github/workflows/publish-portfolio-gh-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages-portfolio
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare publish directory
+        run: |
+          mkdir -p _site
+          cp -a jayasree-portfolio/. _site/
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          force_orphan: true
+          commit_message: Deploy Jayasree Kuniyil portfolio
