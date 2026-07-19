@@ -1,143 +1,89 @@
-// Institute details sourced from public listings (JustDial, Quickerala, Kozhikode Directory)
-export const institute = {
+const institute = {
   name: 'E+++ Solutions',
-  tagline: 'Government Certified Computer Institute',
-  established: 2007,
+  tagline: 'Government-Recognized Computer Institute',
+  experience: '20+',
   rating: '4.9',
   reviews: '150+',
+  email: 'eplusplussolution@gmail.com',
+  social: 'eplusplussolution',
   address: {
     line1: '2nd Floor, Kajal Building',
     line2: 'Annie Hall Road, Palayam',
     city: 'Kozhikode (Calicut), Kerala 673002',
     landmark: 'Near Kozhikode Railway Station',
   },
-  phones: ['+91 84605 12135', '+91 77368 68688'],
-  whatsapp: '918460512135',
+  phones: ['+91 94467 24270', '+91 94950 52932', '+91 77368 68688'],
+  whatsapp: '919446724270',
   mapsUrl: 'https://maps.google.com/?q=Kajal+Building+Annie+Hall+Road+Palayam+Kozhikode+673002',
   hours: {
-    weekdays: 'Mon – Sat: 9:00 AM – 6:30 PM',
-    sunday: 'Sunday: Closed',
+    all: 'Mon – Sun: 9:00 AM – 6:30 PM',
+    detail: 'Open all days including Sunday',
   },
 };
 
-const services = [
+const aboutText = `With over 20+ years of excellence in computer training, E+++ Solutions is a government-recognized institute under the State of Kerala. We offer a wide range of in-demand courses with NORKA-attested certificates valid for PSC exams, overseas opportunities, and career advancement. Our curriculum combines theory with hands-on, project-based learning, guided by experienced industry professionals — ensuring students gain real-world, job-ready skills.`;
+
+const whyChooseUs = [
+  'Expert instructors with industry experience',
+  'Student-specific training based on their abilities',
+  'Government-recognized courses',
+  'Support for online & offline learning',
+  'Placement assistance',
+  'Excellent student feedback & reputation',
+];
+
+const diplomaCourses = [
   {
-    icon: '🎓',
-    title: 'Government Certified Training',
-    desc: 'Recognised computer courses designed to help you build job-ready IT skills and earn certifications.',
-    points: ['Established in 2007', 'Offline & online batches', 'Career-focused curriculum'],
+    code: 'PDCFA',
+    title: 'Post Graduate Diploma in Computer Applications',
+    eligibility: 'Any Degree',
+    duration: '720 Hours (1 Year)',
+    desc: 'Core concepts of computer applications via logic building, database management, communication networks, website designing, and business applications through program coding.',
+    topics: ['Python, C++/Java', 'SQL & RDBMS', 'Web Design & PHP/ASP.Net', 'VB.Net / Android', 'OS, Office Suite & Advanced Excel'],
   },
   {
-    icon: '📊',
-    title: 'Tally & Accounting',
-    desc: 'Practical accounting and Tally training including GST, billing, inventory, and payroll for commerce students and professionals.',
-    points: ['Tally with GST', 'Accounting fundamentals', 'Small business bookkeeping'],
+    code: 'CTTC',
+    title: 'Diploma in Computer Teachers Training Course',
+    eligibility: '10th std passed & above',
+    duration: '720 Hours (1 Year)',
+    desc: 'Fundamental concepts of computers and programming with effective methodologies in teaching IT-based curricula and English practice sessions.',
+    topics: ['C++ & HTML', 'Tally & Accounting', 'DTP (English & Malayalam)', 'Teaching Methods (Pedagogy)', 'Teaching Practice'],
   },
   {
-    icon: '💻',
-    title: 'Programming Courses',
-    desc: 'Learn programming from basics to job-oriented development with hands-on lab practice.',
-    points: ['C & C++', 'Python & Java', 'Full-stack development'],
+    code: 'DCA',
+    title: 'Diploma in Computer Application',
+    eligibility: '10th std passed & above',
+    duration: '720 / 360 Hours (1 Year / 6 Months)',
+    desc: 'Explore essentials and practicalities of computers, operating systems, and system engineering with intense lab practices.',
+    topics: ['Python / C++ / Java', 'Visual Basic.Net', 'RDBMS & SQL', 'Office Suite & Advanced Excel', 'Project work'],
   },
   {
-    icon: '📝',
-    title: 'MS Office & IT Fundamentals',
-    desc: 'Word, Excel, PowerPoint, internet basics, and computer fundamentals for students and office staff.',
-    points: ['MS Office suite', 'Typing & DTP support', 'Digital literacy'],
+    code: 'CWPDE',
+    title: 'Certificate in Word Processing & Data Entry',
+    eligibility: '10th std passed & above',
+    duration: '360 Hours (6 Months)',
+    desc: 'Sharpens data entry skills through keyboard typing practice, then equips students with Word, Excel, PowerPoint and DTP skills.',
+    topics: ['English & Malayalam Typing', 'MS Office Suite', 'DTP (PageMaker, InDesign, ISM)', 'Computer fundamentals'],
   },
   {
-    icon: '🎬',
-    title: 'Video Editing & Animation',
-    desc: 'Creative courses in video editing and 3D animation for media, marketing, and design careers.',
-    points: ['Video editing classes', '3D animation basics', 'Project-based learning'],
-  },
-  {
-    icon: '🌐',
-    title: 'Online & Offline Classes',
-    desc: 'Flexible learning modes for school students, college learners, and working professionals in Kozhikode.',
-    points: ['Palayam centre near railway station', 'Small batch sizes', 'Enquiry & counselling'],
+    code: 'PDCFA-FA',
+    title: 'Professional Diploma in Computerized Financial Accounting',
+    eligibility: '10th std passed & above',
+    duration: '360 Hours (6 Months)',
+    desc: 'Computerized accounting, GST-enabled taxation, Indian & foreign business accounting, and financial report generation.',
+    topics: ['Tally Prime with GST', 'ZOHO Books & QuickBooks', 'GCC VAT', 'Indian Business Accounting'],
   },
 ];
 
-const courses = [
-  {
-    title: 'Tally with GST',
-    level: 'Beginner – Advanced',
-    duration: 'Flexible batches',
-    mode: 'Offline / Online',
-    desc: 'Complete Tally ERP training with GST, accounting entries, invoicing, and practical business scenarios.',
-  },
-  {
-    title: 'MS Office',
-    level: 'Beginner',
-    duration: 'Short-term',
-    mode: 'Weekday batches',
-    desc: 'Word, Excel, PowerPoint and office productivity skills for students and job seekers.',
-  },
-  {
-    title: 'C & C++ Programming',
-    level: 'Beginner – Intermediate',
-    duration: 'Certificate course',
-    mode: 'Lab training',
-    desc: 'Programming logic, syntax, and problem solving with structured lab sessions.',
-  },
-  {
-    title: 'Python Programming',
-    level: 'Intermediate',
-    duration: 'Certificate course',
-    mode: 'Offline / Online',
-    desc: 'Python fundamentals for automation, applications, and entry into data and development roles.',
-  },
-  {
-    title: 'Java Programming',
-    level: 'Intermediate',
-    duration: 'Certificate course',
-    mode: 'Lab training',
-    desc: 'Object-oriented programming with Java for academic and software career preparation.',
-  },
-  {
-    title: 'Video Editing & 3D Animation',
-    level: 'Creative',
-    duration: 'Project-based',
-    mode: 'Practical classes',
-    desc: 'Video editing and animation skills for digital media, content creation, and design work.',
-  },
-  {
-    title: 'Accounting Training',
-    level: 'Beginner',
-    duration: 'Short-term',
-    mode: 'Offline',
-    desc: 'Accounting principles and computerised accounting workflows for commerce and finance roles.',
-  },
-  {
-    title: 'Full Stack & IT Programs',
-    level: 'Advanced',
-    duration: 'Career programs',
-    mode: 'Offline / Online',
-    desc: 'Job-oriented IT training including modern development and emerging technology topics.',
-  },
-];
-
-const plans = [
-  {
-    name: 'Certificate Courses',
-    price: 'Contact',
-    unit: 'for fees',
-    features: ['Government recognised programs', 'Course counselling', 'Flexible batch timings', 'Palayam centre near railway station'],
-  },
-  {
-    name: 'Student Programs',
-    price: 'Affordable',
-    unit: 'packages',
-    featured: true,
-    features: ['MS Office & fundamentals', 'Programming & Tally options', 'Online & offline modes', 'Ideal for college students'],
-  },
-  {
-    name: 'Career & IT Training',
-    price: 'Custom',
-    unit: 'quote',
-    features: ['Python, Java & full-stack paths', 'Video editing & animation', 'Practical project support', 'Speak to our counsellor'],
-  },
+const otherPrograms = [
+  'DOA – Diploma in Office Automation',
+  'PDDTP – Professional Diploma in Desktop Publishing',
+  'PDCAD – Professional Diploma in Computer Aided Design',
+  'PDWD – Professional Diploma in Web Designing',
+  'DGSTP – Diploma in Goods and Services Tax Practice',
+  'DCBAT – Diploma in Corporate Business Accounting & Taxation',
+  'Interior Designing',
+  'Fashion Designing',
 ];
 
 function addressHtml() {
@@ -146,86 +92,109 @@ function addressHtml() {
 }
 
 function phonesHtml() {
-  return institute.phones.map((p) => `<a href="tel:${p.replace(/\s/g, '')}" style="color:inherit">${p}</a>`).join('<br />');
+  return institute.phones.map((p) => {
+    const tel = p.replace(/\s/g, '').replace('+', '');
+    return `<a href="tel:+${tel}" style="color:inherit">${p}</a>`;
+  }).join('<br />');
+}
+
+function courseCard(c, i) {
+  return `
+    <article class="card reveal" style="--delay:${i * 80}ms">
+      <span class="course-code">${c.code}</span>
+      <h3>${c.title}</h3>
+      <p>${c.desc}</p>
+      <div class="course-meta">
+        <span class="tag">${c.eligibility}</span>
+        <span class="tag">${c.duration}</span>
+      </div>
+      <ul class="course-topics">${c.topics.map((t) => `<li>${t}</li>`).join('')}</ul>
+      <a href="#/contact" class="btn btn-primary btn-sm course-btn">Enquire Now</a>
+    </article>`;
 }
 
 function renderHome() {
-  const years = new Date().getFullYear() - institute.established;
   return `
     <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
       <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Kozhikode · Palayam · Near Railway Station</div>
-          <h1>Government certified computer training since ${institute.established}.</h1>
-          <p>E+++ Solutions is a trusted computer institute in Calicut offering Tally, MS Office, programming, accounting, video editing, and IT courses — with both online and offline classes.</p>
+        <div class="hero-copy reveal">
+          <div class="eyebrow animate-shimmer">Kozhikode · Palayam · Near Railway Station</div>
+          <h1 class="animate-title">Government-recognized computer training with <span class="text-gradient">20+ years</span> of excellence.</h1>
+          <p>NORKA-attested certificates for PSC exams, overseas opportunities, and career growth. Online & offline batches available — open all days including Sunday.</p>
           <div class="hero-actions">
-            <a href="#/courses" class="btn btn-primary">View Courses</a>
-            <a href="https://wa.me/${institute.whatsapp}" class="btn btn-secondary" target="_blank" rel="noopener">WhatsApp Us</a>
+            <a href="#/courses" class="btn btn-primary btn-glow">View Courses</a>
+            <a href="https://wa.me/${institute.whatsapp}" class="btn btn-secondary" target="_blank" rel="noopener">WhatsApp ${institute.phones[0]}</a>
           </div>
           <div class="hero-stats">
-            <div><strong>${years}+ yrs</strong><span>Teaching experience</span></div>
-            <div><strong>${institute.rating}★</strong><span>${institute.reviews} reviews</span></div>
-            <div><strong>Palayam</strong><span>Near Kozhikode Railway Station</span></div>
+            <div class="stat-pill reveal" style="--delay:100ms"><strong>${institute.experience}</strong><span>Years experience</span></div>
+            <div class="stat-pill reveal" style="--delay:200ms"><strong>${institute.rating}★</strong><span>${institute.reviews} reviews</span></div>
+            <div class="stat-pill reveal" style="--delay:300ms"><strong>7 days</strong><span>Open including Sunday</span></div>
           </div>
         </div>
-        <div class="hero-card">
-          <h3>Why students choose E+++ Solutions</h3>
+        <div class="hero-card reveal float-card" style="--delay:150ms">
+          <h3>Why choose E+++ Solutions?</h3>
           <div class="hero-list">
-            <div class="hero-list-item">
-              <div class="icon">✓</div>
-              <div><strong>Government certified courses</strong><p class="muted">Programs that help you prepare for IT and office careers.</p></div>
-            </div>
-            <div class="hero-list-item">
-              <div class="icon">✓</div>
-              <div><strong>Convenient location</strong><p class="muted">2nd Floor, Kajal Building, Annie Hall Road — walkable from Kozhikode railway station.</p></div>
-            </div>
-            <div class="hero-list-item">
-              <div class="icon">✓</div>
-              <div><strong>Online & offline classes</strong><p class="muted">Flexible learning for school, college, and working students.</p></div>
-            </div>
+            ${whyChooseUs.map((item, i) => `
+              <div class="hero-list-item reveal" style="--delay:${200 + i * 60}ms">
+                <div class="icon">✓</div>
+                <div><strong>${item}</strong></div>
+              </div>
+            `).join('')}
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section reveal">
       <div class="container">
         <div class="section-header">
-          <h2>Computer institute services in Kozhikode</h2>
-          <p>From accounting and programming to creative and IT career programs — all under one roof in Palayam.</p>
+          <h2>About E+++ Solutions</h2>
+          <p>${aboutText}</p>
         </div>
-        <div class="grid-3">
-          ${services.slice(0, 3).map((s) => `
-            <article class="card">
-              <div class="card-icon">${s.icon}</div>
-              <h3>${s.title}</h3>
-              <p>${s.desc}</p>
-            </article>
-          `).join('')}
-        </div>
-        <div style="text-align:center;margin-top:28px">
-          <a href="#/services" class="btn btn-secondary">View all services →</a>
+        <div style="text-align:center">
+          <a href="#/about" class="btn btn-secondary">Read more about us →</a>
         </div>
       </div>
     </section>
 
-    <section class="section" style="background:#fff">
+    <section class="section section-alt">
       <div class="container">
-        <div class="section-header">
-          <h2>Popular courses at E+++ Solutions</h2>
-          <p>Tally, MS Office, C/C++, Python, Java, accounting, video editing, and more. New batches open regularly.</p>
+        <div class="section-header reveal">
+          <h2>Flagship diploma programs</h2>
+          <p>Government-recognized courses with practical lab training and project-based learning.</p>
         </div>
         <div class="grid-3">
-          ${courses.slice(0, 3).map((c) => `
-            <article class="card">
-              <h3>${c.title}</h3>
-              <p>${c.desc}</p>
-              <div class="course-meta">
-                <span class="tag">${c.level}</span>
-                <span class="tag">${c.mode}</span>
-              </div>
-            </article>
-          `).join('')}
+          ${diplomaCourses.slice(0, 3).map((c, i) => courseCard(c, i)).join('')}
+        </div>
+        <div style="text-align:center;margin-top:28px" class="reveal">
+          <a href="#/courses" class="btn btn-secondary">View all courses →</a>
+        </div>
+      </div>
+    </section>`;
+}
+
+function renderAbout() {
+  return `
+    <section class="section page-top">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>About Us</h2>
+          <p>${aboutText}</p>
+        </div>
+        <div class="grid-2">
+          <div class="card reveal">
+            <h3>Our mission</h3>
+            <p class="muted">To deliver government-recognized, job-oriented computer education that empowers students for PSC exams, overseas careers, and the IT industry through hands-on training.</p>
+          </div>
+          <div class="card reveal" style="--delay:100ms">
+            <h3>Certifications</h3>
+            <p class="muted">NORKA-attested certificates from a Kerala government-recognized institute — trusted for PSC applications and international opportunities.</p>
+          </div>
+        </div>
+        <div class="card reveal" style="--delay:200ms;margin-top:24px">
+          <h3>Why choose us?</h3>
+          <ul class="check-list">${whyChooseUs.map((w) => `<li>${w}</li>`).join('')}</ul>
         </div>
       </div>
     </section>`;
@@ -233,19 +202,25 @@ function renderHome() {
 
 function renderServices() {
   return `
-    <section class="section" style="padding-top:48px">
+    <section class="section page-top">
       <div class="container">
-        <div class="section-header">
-          <h2>Our Services</h2>
-          <p>Government recognised computer training and software courses in Palayam, Kozhikode.</p>
+        <div class="section-header reveal">
+          <h2>What we offer</h2>
+          <p>Professional, job-oriented programs for students, teachers, and career seekers in Kozhikode.</p>
         </div>
         <div class="grid-3">
-          ${services.map((s) => `
-            <article class="card">
+          ${[
+            { icon: '🎓', title: 'Diploma Programs', desc: 'PDCFA, DCA, CTTC, CWPDE and financial accounting diplomas with structured semesters.' },
+            { icon: '📜', title: 'NORKA Certificates', desc: 'Attested certificates valid for PSC exams, overseas jobs, and government applications.' },
+            { icon: '💼', title: 'Placement Support', desc: 'Career guidance and placement assistance for job-ready graduates.' },
+            { icon: '🖥️', title: 'Lab Training', desc: 'Hands-on practical sessions with project work and seminar components.' },
+            { icon: '🌐', title: 'Online & Offline', desc: 'Flexible learning modes for school, college, and working professionals.' },
+            { icon: '📊', title: 'Accounting & GST', desc: 'Tally Prime, ZOHO Books, GCC VAT, and computerized financial accounting.' },
+          ].map((s, i) => `
+            <article class="card reveal hover-lift" style="--delay:${i * 70}ms">
               <div class="card-icon">${s.icon}</div>
               <h3>${s.title}</h3>
               <p>${s.desc}</p>
-              <ul>${s.points.map((p) => `<li>${p}</li>`).join('')}</ul>
             </article>
           `).join('')}
         </div>
@@ -255,27 +230,21 @@ function renderServices() {
 
 function renderCourses() {
   return `
-    <section class="section" style="padding-top:48px">
+    <section class="section page-top">
       <div class="container">
-        <div class="section-header">
-          <h2>Training Courses</h2>
-          <p>Job-oriented computer courses with practical training at our Kozhikode centre near the railway station.</p>
+        <div class="section-header reveal">
+          <h2>Diploma & Certificate Courses</h2>
+          <p>Structured programs with theory, lab, and project components — as per E+++ Solutions curriculum.</p>
         </div>
-        <div class="grid-3">
-          ${courses.map((c) => `
-            <article class="card">
-              <h3>${c.title}</h3>
-              <p>${c.desc}</p>
-              <div class="course-meta">
-                <span class="tag">${c.level}</span>
-                <span class="tag">${c.duration}</span>
-                <span class="tag">${c.mode}</span>
-              </div>
-              <div style="margin-top:20px">
-                <a href="#/contact" class="btn btn-primary btn-sm" style="padding:10px 16px">Enquire Now</a>
-              </div>
-            </article>
-          `).join('')}
+        <div class="grid-2 course-grid">
+          ${diplomaCourses.map((c, i) => courseCard(c, i)).join('')}
+        </div>
+        <div class="section-header reveal" style="margin-top:56px">
+          <h2>More professional programs</h2>
+          <p>We also provide a wide selection of job-oriented courses including:</p>
+        </div>
+        <div class="program-tags reveal">
+          ${otherPrograms.map((p) => `<span class="tag tag-lg">${p}</span>`).join('')}
         </div>
       </div>
     </section>`;
@@ -283,22 +252,24 @@ function renderCourses() {
 
 function renderPricing() {
   return `
-    <section class="section" style="padding-top:48px">
+    <section class="section page-top">
       <div class="container">
-        <div class="section-header">
-          <h2>Course fees & packages</h2>
-          <p>Fees vary by course and batch. Call or WhatsApp us for the latest schedule and admission details.</p>
+        <div class="section-header reveal">
+          <h2>Admissions & fees</h2>
+          <p>Course fees vary by program and duration. Contact us for batch schedules, eligibility, and current fee structure.</p>
         </div>
         <div class="grid-3">
-          ${plans.map((p) => `
-            <article class="card ${p.featured ? 'featured' : ''}">
-              ${p.featured ? '<span class="badge">Popular</span>' : ''}
+          ${[
+            { name: 'Certificate Courses', price: '6 months', unit: 'CWPDE & more', features: ['Typing & data entry', 'MS Office & DTP', 'Ideal for beginners', '10th pass eligible'] },
+            { name: 'Diploma Programs', price: '1 year', unit: '720 hours', featured: true, features: ['PDCFA, DCA, CTTC', 'Lab + project work', 'Government recognized', 'NORKA attestation'] },
+            { name: 'Professional Diplomas', price: 'Custom', unit: 'programs', features: ['Web design & CAD', 'GST & taxation', 'Interior & fashion design', 'Career counselling'] },
+          ].map((p, i) => `
+            <article class="card reveal hover-lift ${p.featured ? 'featured' : ''}" style="--delay:${i * 90}ms">
+              ${p.featured ? '<span class="badge">Most Popular</span>' : ''}
               <h3>${p.name}</h3>
               <div class="price">${p.price} <small>${p.unit}</small></div>
               <ul>${p.features.map((f) => `<li>${f}</li>`).join('')}</ul>
-              <div style="margin-top:22px">
-                <a href="#/contact" class="btn ${p.featured ? 'btn-primary' : 'btn-secondary'}">Enquire Now</a>
-              </div>
+              <a href="https://wa.me/${institute.whatsapp}" class="btn ${p.featured ? 'btn-primary' : 'btn-secondary'}" target="_blank" rel="noopener">WhatsApp for fees</a>
             </article>
           `).join('')}
         </div>
@@ -308,11 +279,11 @@ function renderPricing() {
 
 function renderContact() {
   return `
-    <section class="section" style="padding-top:48px">
+    <section class="section page-top">
       <div class="container contact-grid">
-        <div class="card">
-          <h2 style="margin-bottom:8px">Get in touch</h2>
-          <p class="muted" style="margin-bottom:24px">Ask about admissions, batch timings, or visit our Palayam centre near Kozhikode railway station.</p>
+        <div class="card reveal">
+          <h2>Contact us</h2>
+          <p class="muted" style="margin-bottom:24px">Call, WhatsApp, or visit our Palayam centre near Kozhikode railway station.</p>
           <form id="contact-form">
             <div class="form-field">
               <label for="name">Full name</label>
@@ -323,52 +294,35 @@ function renderContact() {
               <input id="phone" name="phone" required placeholder="10-digit mobile number" />
             </div>
             <div class="form-field">
-              <label for="interest">I'm interested in</label>
+              <label for="interest">Course interested in</label>
               <select id="interest" name="interest">
-                <option>Tally with GST</option>
-                <option>MS Office</option>
-                <option>C / C++ Programming</option>
-                <option>Python / Java</option>
-                <option>Accounting course</option>
-                <option>Video editing / Animation</option>
-                <option>Other course</option>
+                ${diplomaCourses.map((c) => `<option>${c.code} – ${c.title}</option>`).join('')}
+                ${otherPrograms.map((p) => `<option>${p}</option>`).join('')}
               </select>
             </div>
             <div class="form-field">
               <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Course, preferred timing, or any questions..."></textarea>
+              <textarea id="message" name="message" placeholder="Batch timing, eligibility, or questions..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Send Enquiry</button>
+            <button type="submit" class="btn btn-primary btn-glow">Send via WhatsApp</button>
           </form>
         </div>
         <div>
-          <div class="card" style="margin-bottom:24px">
-            <h3 style="margin-bottom:18px">Visit us in Kozhikode</h3>
+          <div class="card reveal" style="--delay:100ms;margin-bottom:24px">
+            <h3>Visit us</h3>
             <div class="info-list">
-              <div class="info-item">
-                <div class="icon">📍</div>
-                <div><strong>Address</strong><p class="muted">${addressHtml()}</p>
-                  <a href="${institute.mapsUrl}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="margin-top:10px;padding-left:0">Get directions →</a>
-                </div>
-              </div>
-              <div class="info-item">
-                <div class="icon">📞</div>
-                <div><strong>Phone</strong><p class="muted">${phonesHtml()}</p></div>
-              </div>
-              <div class="info-item">
-                <div class="icon">💬</div>
-                <div><strong>WhatsApp</strong><p class="muted"><a href="https://wa.me/${institute.whatsapp}" target="_blank" rel="noopener" style="color:inherit">Chat on WhatsApp</a></p></div>
-              </div>
-              <div class="info-item">
-                <div class="icon">🕐</div>
-                <div><strong>Opening hours</strong><p class="muted">${institute.hours.weekdays}<br />${institute.hours.sunday}</p></div>
-              </div>
+              <div class="info-item"><div class="icon">📍</div><div><strong>Address</strong><p class="muted">${addressHtml()}</p>
+                <a href="${institute.mapsUrl}" target="_blank" rel="noopener" class="link-arrow">Get directions →</a></div></div>
+              <div class="info-item"><div class="icon">📞</div><div><strong>Phone</strong><p class="muted">${phonesHtml()}</p></div></div>
+              <div class="info-item"><div class="icon">💬</div><div><strong>WhatsApp</strong><p class="muted"><a href="https://wa.me/${institute.whatsapp}" target="_blank" rel="noopener" style="color:inherit">+91 94467 24270</a></p></div></div>
+              <div class="info-item"><div class="icon">✉️</div><div><strong>Email</strong><p class="muted"><a href="mailto:${institute.email}" style="color:inherit">${institute.email}</a></p></div></div>
+              <div class="info-item"><div class="icon">🕐</div><div><strong>Hours</strong><p class="muted">${institute.hours.all}<br />${institute.hours.detail}</p></div></div>
             </div>
           </div>
-          <div class="card" style="background:linear-gradient(135deg,#1d4ed8,#0891b2);color:#fff;border:none">
-            <h3>Free course counselling</h3>
-            <p style="margin:12px 0 18px;opacity:0.9">Not sure which program fits you? Visit E+++ Solutions near Kozhikode railway station or message us on WhatsApp.</p>
-            <a href="https://wa.me/${institute.whatsapp}" class="btn btn-secondary" style="background:#fff" target="_blank" rel="noopener">WhatsApp ${institute.phones[0]}</a>
+          <div class="card cta-card reveal float-card" style="--delay:200ms">
+            <h3>Talk to us on WhatsApp</h3>
+            <p>Quick response for admissions, course details, and batch timings.</p>
+            <a href="https://wa.me/${institute.whatsapp}" class="btn btn-secondary" style="background:#fff;margin-top:16px" target="_blank" rel="noopener">Chat: 94467 24270</a>
           </div>
         </div>
       </div>
@@ -377,6 +331,7 @@ function renderContact() {
 
 const routes = {
   '/': renderHome,
+  '/about': renderAbout,
   '/services': renderServices,
   '/courses': renderCourses,
   '/pricing': renderPricing,
@@ -396,19 +351,30 @@ function showToast(message) {
   setTimeout(() => { toast.hidden = true; }, 3500);
 }
 
+function initScrollAnimations() {
+  const items = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  items.forEach((el) => observer.observe(el));
+}
+
 function bindContactForm() {
   const form = document.getElementById('contact-form');
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     const fd = new FormData(form);
-    const name = fd.get('name');
-    const phone = fd.get('phone');
-    const interest = fd.get('interest');
-    const message = fd.get('message');
-    const text = encodeURIComponent(`Hello E+++ Solutions, I am ${name} (${phone}). I am interested in ${interest}. ${message || ''}`);
+    const text = encodeURIComponent(
+      `Hello E+++ Solutions,\nI am ${fd.get('name')} (${fd.get('phone')}).\nInterested in: ${fd.get('interest')}\n${fd.get('message') || ''}`
+    );
     window.open(`https://wa.me/${institute.whatsapp}?text=${text}`, '_blank');
     form.reset();
-    showToast('Opening WhatsApp to send your enquiry...');
+    showToast('Opening WhatsApp...');
   });
 }
 
@@ -416,13 +382,15 @@ function navigate() {
   const path = parseRoute();
   const render = routes[path] || renderHome;
   document.getElementById('app').innerHTML = render();
-  document.title = `${path === '/' ? 'Home' : path.slice(1).charAt(0).toUpperCase() + path.slice(2)} | E+++ Solutions Kozhikode`;
+  const pageName = path === '/' ? 'Home' : path.slice(1).charAt(0).toUpperCase() + path.slice(2);
+  document.title = `${pageName} | E+++ Solutions Kozhikode`;
 
   document.querySelectorAll('.site-nav a[data-path]').forEach((link) => {
     link.classList.toggle('active', link.dataset.path === path);
   });
 
   bindContactForm();
+  requestAnimationFrame(initScrollAnimations);
   document.getElementById('site-nav')?.classList.remove('open');
 }
 
@@ -431,6 +399,5 @@ document.getElementById('nav-toggle')?.addEventListener('click', () => {
 });
 
 window.addEventListener('hashchange', navigate);
-
 if (!location.hash) location.hash = '#/';
 else navigate();
