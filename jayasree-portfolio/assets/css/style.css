@@ -221,17 +221,19 @@ strong {
 
 .hero-portrait {
   justify-self: end;
-  width: min(100%, 380px);
+  width: min(100%, 360px);
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 0.45rem;
+  box-shadow: 0 18px 40px rgba(15, 39, 68, 0.14);
 }
 
 .hero-portrait img {
   width: 100%;
-  height: auto;
-  max-height: min(560px, 68vh);
+  height: 100%;
   object-fit: cover;
-  object-position: center 18%;
-  border-radius: 0.45rem;
-  box-shadow: 0 18px 40px rgba(15, 39, 68, 0.14);
+  object-position: center 12%;
+  display: block;
   animation: hero-rise 0.9s var(--ease) both;
 }
 
@@ -627,11 +629,7 @@ strong {
   }
 
   .hero-portrait {
-    width: min(100%, 280px);
-  }
-
-  .hero-portrait img {
-    max-height: 380px;
+    width: min(100%, 260px);
   }
 
   .work-item {
