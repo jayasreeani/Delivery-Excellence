@@ -5,6 +5,7 @@ on:
     branches: [cursor/jayasree-portfolio-4082, master]
     paths:
       - 'jayasree-portfolio/**'
+      - '.github/workflows/deploy-portfolio-pages.yml'
   workflow_dispatch:
 
 permissions:
